@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="jumbotron">
-      <h1 class="display-4">Информация об дилерских центрах</h1>
-      <p class="lead">На данной странице можно просматривать и редактировать дилерские центры</p>
+      <h1 class="display-4">Информация о библиотеках</h1>
+      <p class="lead">На данной странице можно просматривать и редактировать библиотеки</p>
       <hr class="my-4">
       <p>Чтобы что-то сделать, тыкай на кнопки</p>
-        <a href="{{ url_for('add_dealer') }}">
-            <button type="button" class="btn btn-secondary">Добавить дилерский центр</button>
+        <a href="{{ url_for('add_library') }}">
+            <button type="button" class="btn btn-secondary">Добавить библиотеку</button>
         </a>
     </div>
     {% for item in dealers %}
@@ -16,6 +16,7 @@
             <h3 class="card-title">{{ item[1] }}</h3>
             <p class="card-text">{{ item[2] }}</p>
             <a href="/dealer/{{ item[0] }}" class="btn btn-primary">Подробнее</a>
+              <a href="/del_library/{{ item[0] }}" class="btn btn-danger">Удалить библиотеку из списка</a>
           </div>
         </div>
     {% endfor %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Добавление автомобиля</h1>
+    <h1>Добавление книги</h1>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -16,9 +16,9 @@
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.model.label }}<br>
-            {{ form.model }}<br>
-            {% for error in form.model.errors %}
+            {{ form.name.label }}<br>
+            {{ form.name }}<br>
+            {% for error in form.name.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
@@ -34,27 +34,18 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.power.label }}<br>
-            {{ form.power }}<br>
-            {% for error in form.power.errors %}
+            {{ form.info.label }}<br>
+            {{ form.info }}<br>
+            {% for error in form.info.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
             {% endfor %}
         </p>
         <p>
-            {{ form.color.label }}<br>
-            {{ form.color }}<br>
-            {% for error in form.color.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error }}
-                </div>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.dealer_id.label }}<br>
-            {{ form.dealer_id }}<br>
-            {% for error in form.dealer_id.errors %}
+            {{ form.library_id.label }}<br>
+            {{ form.library_id }}<br>
+            {% for error in form.library_id.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>

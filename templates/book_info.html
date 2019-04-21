@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="jumbotron">
+          <h1 class="display-4">{{ car[1] }}</h1>
+          <p class="lead">Стоимость: {{ car[2] }}</p>
+          <hr class="my-4">
+          <p>Краткое содержание: {{ car[3] }}</p>
+          <p>Библиотека: {{ dealer }}</p>
+        </div>
+        <a href="/book_admin"> <button type="button" class="btn btn-outline-info">Назад</button></a>
+{% endblock %}

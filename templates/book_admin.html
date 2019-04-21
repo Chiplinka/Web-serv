@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+      <h1 class="display-4">Информация о книгах</h1>
+      <p class="lead">На данной странице можно просматривать и редактировать книги</p>
+      <hr class="my-4">
+      <p>Чтобы что-то сделать, тыкай на кнопки</p>
+        <a href="{{ url_for('add_book') }}">
+            <button type="button" class="btn btn-secondary">Добавить книгу</button>
+        </a>
+    </div>
+    {% for item in cars %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h3 class="card-title">{{ item[0] }}</h3>
+            <p class="card-text">{{ item[1] }}</p>
+            <a href="/book/{{ item[2] }}" class="btn btn-primary">Подробнее</a>
+            <a href="/del_book/{{ item[2] }}" class="btn btn-danger">Снять с продажи</a>
+          </div>
+        </div>
+    {% endfor %}
+{% endblock %}

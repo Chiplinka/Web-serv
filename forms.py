@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField,TextAreaField
 from wtforms.validators import DataRequired, Email
 
 
@@ -21,31 +21,30 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Создать учетную запись')
 
 
-class AddCarForm(FlaskForm):
+class AddbookForm(FlaskForm):
     """Форма добавления автомобиля"""
-    model = StringField('Модель', validators=[DataRequired()])
+    name = StringField('Название книги', validators=[DataRequired()])
     price = IntegerField('Цена', validators=[DataRequired()])
-    power = IntegerField('Мощность (л.с.)', validators=[DataRequired()])
-    color = StringField('Цвет', validators=[DataRequired()])
-    dealer_id = SelectField('Номер дилерского центра', coerce=int, validators=[DataRequired()])
-    submit = SubmitField('Добавить автомобиль')
+    info = TextAreaField('Краткое содержание', validators=[DataRequired()])
+    library_id = SelectField('Название библиотеки', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Добавить книгу')
 
 
 class AddDealerForm(FlaskForm):
     """Добавление дилерского центра"""
     name = StringField('Название', validators=[DataRequired()])
     address = StringField('Адрес', validators=[DataRequired()])
-    submit = SubmitField('Добавить дилерский центр')
+    submit = SubmitField('Добавить библиотеку')
 
 
 class SearchPriceForm(FlaskForm):
     """Форма поиска по цене"""
-    start_price = IntegerField('Минимальная цена', validators=[DataRequired()], default=500000)
-    end_price = IntegerField('Максимальная цена', validators=[DataRequired()], default=1000000)
+    start_price = IntegerField('Минимальная цена', validators=[DataRequired()], default=100)
+    end_price = IntegerField('Максимальная цена', validators=[DataRequired()], default=200)
     submit = SubmitField('Поиск')
 
 
 class SearchDealerForm(FlaskForm):
     """Форма поиска по дилерскому центру"""
-    dealer_id = SelectField('Номер дилерского центра', coerce=int, validators=[DataRequired()])
+    library_id = SelectField('Номер библиотеки', coerce=int, validators=[DataRequired()])
     submit = SubmitField('Поиск')

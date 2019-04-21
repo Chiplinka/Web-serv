@@ -112,66 +112,71 @@ class CarsModel:
     def init_table(self):
         """Инициализация таблицы"""
         cursor = self.connection.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS cars 
-                            (car_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                             model VARCHAR(20),
+        cursor.execute('''CREATE TABLE IF NOT EXISTS books 
+                            (book_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                             name VARCHAR(20),
                              price INTEGER,
-                             power INTEGER,
-                             color VARCHAR(20),
-                             dealer INTEGER
+                             info VARCHAR(100),
+                             library INTEGER
                         )''')
         cursor.close()
         self.connection.commit()
 
-    def insert(self, model, price, power, color, dealer):
+    def insert(self, name, price, info, library):
         """Добавление автомобиля"""
         cursor = self.connection.cursor()
-        cursor.execute('''INSERT INTO cars 
-                          (model, price, power, color, dealer) 
-                          VALUES (?,?,?,?,?)''',
-                       (model, str(price), str(power), color, str(dealer)))
+        cursor.execute('''INSERT INTO books 
+                          (name, price, info, library) 
+                          VALUES (?,?,?,?)''',
+                       (name, str(price), str(info), str(library)))
         cursor.close()
         self.connection.commit()
 
-    def exists(self, model):
+    def exists(self, name):
         """Поиск автомобиля по модели"""
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM cars WHERE model = ?",
-                       model)
+        cursor.execute("SELECT * FROM books WHERE name = ?",
+                       name)
         row = cursor.fetchone()
         return (True, row[0]) if row else (False,)
 
-    def get(self, car_id):
+    def get(self, book_id):
         """Поиск автомобиля по id"""
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM cars WHERE car_id = ?", (str(car_id)))
+        cursor.execute("SELECT * FROM books WHERE book_id = ?", (str(book_id)))
         row = cursor.fetchone()
         return row
 
     def get_all(self):
         """Запрос всех автомобилей"""
         cursor = self.connection.cursor()
-        cursor.execute("SELECT model, price, car_id FROM cars")
+        cursor.execute("SELECT name, price, book_id FROM books")
         rows = cursor.fetchall()
         return rows
 
-    def delete(self, car_id):
+    def delete(self, book_id):
         """Удаление автомобиля"""
         cursor = self.connection.cursor()
-        cursor.execute('''DELETE FROM cars WHERE car_id = ?''', (str(car_id)))
+        cursor.execute('''DELETE FROM books WHERE book_id = ?''', (str(book_id)))
         cursor.close()
         self.connection.commit()
 
     def get_by_price(self, start_price, end_price):
         """Запрос автомобилей по цене"""
         cursor = self.connection.cursor()
-        cursor.execute("SELECT model, price, car_id FROM cars WHERE price >= ? AND price <= ?", (str(start_price), str(end_price)))
+        cursor.execute("SELECT name, price, book_id FROM books WHERE price >= ? AND price <= ?", (str(start_price), str(end_price)))
         row = cursor.fetchall()
         return row
 
-    def get_by_dealer(self, dealer_id):
+    def get_by_dealer(self, library_id):
         """Запрос автомобилей по дилерскому центру"""
         cursor = self.connection.cursor()
-        cursor.execute("SELECT model, price, car_id FROM cars WHERE dealer = ?", (str(dealer_id)))
+        cursor.execute("SELECT name, price, book_id FROM books WHERE library = ?", (str(library_id)))
         row = cursor.fetchall()
         return row
+
+    def get_delete_by_library_id(self, library_id):
+        cursor = self.connection.cursor()
+        cursor.execute('''DELETE FROM books WHERE library = {}'''.format(library_id))
+        cursor.close()
+        self.connection.commit()
