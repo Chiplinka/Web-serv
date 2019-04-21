@@ -48,7 +48,7 @@ class UsersModel:
         return rows
 
 
-class DealersModel:
+class LibraryModel:
     """Сущность дилерских центров"""
     def __init__(self, connection):
         self.connection = connection
@@ -104,7 +104,7 @@ class DealersModel:
         self.connection.commit()
 
 
-class CarsModel:
+class BooksModel:
     """Сущность автомобилей"""
     def __init__(self, connection):
         self.connection = connection
